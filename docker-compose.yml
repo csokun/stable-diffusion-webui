@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    image: sd-web-ui-origin
+    restart: unless-stopped
+    ports:
+      - "7861:7860"
+    command: ["./run.sh", "--listen", "--medvram", "--medvram-sdxl", "--always-batch-cond-uncond", "--xformers", "--no-half-vae", "--no-half-controlnet", "--opt-split-attention", "--enable-insecure-extension-access"]
+    environment:
+      - PYTORCH_CUDA_ALLOC_CONF=garbage_collection_threshold:0.9,max_split_size_mb:512
+      - CMDARGS=--listen --lowvram --xformers --no-half-vae --enable-insecure-extension-access # Arguments for launch.py.
+    volumes:
+      - ./webui-user.sh:/app/webui-user.sh
+      - ./repositories:/app/repositories:rw
+      - ./extensions:/app/extensions
+      - ./models:/app/models
+      - ./ui-config.json:/app/ui-config.json
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [compute, utility, gpu]
