@@ -34,5 +34,13 @@ ultralytics
 fvcore
 mediapipe>=0.10.14
 
-# WD14Tag
-ml_dtypes>=0.4.0
+# Interigator
+clip_interrogator
+
+# Deforum
+numexpr
+pandas
+av
+pims
+imageio_ffmpeg
+gdown

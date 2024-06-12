@@ -14,7 +14,10 @@ services:
       - ./repositories:/app/repositories:rw
       - ./extensions:/app/extensions
       - ./models:/app/models
+      - ./outputs:/app/outputs
+      # settings
       - ./ui-config.json:/app/ui-config.json
+      - ./config.json:/app/config.json
     tty: true
     deploy:
       resources:
