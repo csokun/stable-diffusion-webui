@@ -18,6 +18,7 @@ services:
       # settings
       - ./ui-config.json:/app/ui-config.json
       - ./config.json:/app/config.json
+      - ./styles.csv:/app/styles.csv
     tty: true
     deploy:
       resources:
